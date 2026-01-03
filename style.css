@@ -1,0 +1,85 @@
+/* ============================================
+   1. 기본 초기화
+   ============================================ */
+
+/* * (전체) 선택자 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* * 선택자 닫기 */
+
+/* body 선택자 */
+body {
+  background-color: #f0f0f0; /* 연한 회색 */
+  font-family: "Malgun Gothic", sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+}
+/* body 선택자 닫기 */
+
+
+/* ============================================
+   2. 전체 레이아웃 (컨테이너)
+   ============================================ */
+
+/* .invitation-container 선택자 */
+.invitation-container {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+
+  display: flex;
+  overflow-x: auto;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none; /* IE/Edge(구버전) 스크롤바 숨김 */
+  scrollbar-width: none;    /* Firefox 스크롤바 숨김 */
+
+  cursor: grab;
+  user-select: none;
+}
+/* .invitation-container 닫기 */
+
+/* .invitation-container.active 선택자 */
+.invitation-container.active {
+  cursor: grabbing;
+  scroll-snap-type: none;  /* 드래그 중에는 스냅 해제 */
+  scroll-behavior: auto;   /* 드래그 중에는 즉시 반응 */
+}
+/* .invitation-container.active 닫기 */
+
+/* 웹킷 기반 스크롤바 선택자 */
+.invitation-container::-webkit-scrollbar {
+  display: none;
+}
+/* 웹킷 스크롤바 숨기기 닫기 */
+
+
+/* ============================================
+   3. 슬라이드 아이템
+   ============================================ */
+
+/* .slide-item 선택자 */
+.slide-item {
+  min-width: 100%;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+/* .slide-item 닫기 */
+
+/* .slide-item img 선택자 */
+.slide-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-user-drag: none;
+}
+/* .slide-item img 닫기 */

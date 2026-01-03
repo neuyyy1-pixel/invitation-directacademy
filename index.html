@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- ============================================
+         기본 설정
+         ============================================ -->
+
+    <!-- 문자 인코딩 -->
+    <meta charset="UTF-8" />
+
+    <!-- 반응형 웹 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 문서 제목 -->
+    <title>2026 다이렉트아카데미 신년회 모바일 초대권</title>
+
+    <!-- 기본 스타일 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f0f0f0;
+        font-family: 'Malgun Gothic', sans-serif;
+      }
+
+      .invitation-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+
+        display: flex;
+        height: 100vh;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        cursor: grab;
+      }
+
+      .invitation-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .invitation-container.active {
+        cursor: grabbing;
+      }
+
+      .slide-item {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+        pointer-events: none; /* 드래그 시 이미지 선택 방지 */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ============================================
+         HTML 구조
+         ============================================ -->
+
+    <!-- 전체 슬라이드 컨테이너 -->
+    <div class="invitation-container">
+      
+      <!-- 첫 번째 슬라이드 -->
+      <div class="slide-item">
+        <img src="static/image/1.png" alt="메인 포스터" />
+      </div>
+
+      <!-- 두 번째 슬라이드 -->
+      <div class="slide-item">
+        <img src="static/image/2.png" alt="초대 문구" />
+      </div>
+
+      <!-- 세 번째 슬라이드 -->
+      <div class="slide-item">
+        <img src="static/image/3.png" alt="제공 내역" />
+      </div>
+
+      <!-- 네 번째 슬라이드 -->
+      <div class="slide-item">
+        <img src="static/image/4.png" alt="오시는 길" />
+      </div>
+
+      <!-- 다섯 번째 슬라이드 -->
+      <div class="slide-item">
+        <img src="static/image/5.png" alt="게스트 소개" />
+      </div>
+
+    </div>
+
+    <!-- ============================================
+         드래그 스크롤 스크립트 (PC용)
+         ============================================ -->
+    <script>
+      const slider = document.querySelector(".invitation-container");
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener("mousedown", (e) => {
+        isDown = true;
+        slider.classList.add("active");
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        isDown = false;
+        slider.classList.remove("active");
+      });
+
+      slider.addEventListener("mouseup", () => {
+        isDown = false;
+        slider.classList.remove("active");
+
+        // 드래그 종료 시 가장 가까운 슬라이드로 스냅
+        const slideWidth = slider.clientWidth;
+        const index = Math.round(slider.scrollLeft / slideWidth);
+        slider.scrollTo({
+          left: slideWidth * index,
+          behavior: "smooth",
+        });
+      });
+
+      slider.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    </script>
+  </body>
+</html>
