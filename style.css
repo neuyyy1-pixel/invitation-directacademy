@@ -32,7 +32,7 @@ body {
 .invitation-container {
   max-width: 600px;
   width: 100%;
-  background-color: #fff;
+  background-color: #000;
 
   display: flex;
   overflow-x: auto;
